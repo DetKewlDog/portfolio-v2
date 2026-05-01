@@ -1,9 +1,9 @@
 <script lang='ts'>
-	import { newTypewriter } from "$src/lib/stores/typewriter";
-	import { width } from "$src/lib/utils";
+	import { newTypewriter } from "$lib/stores/typewriter";
+	import { width } from "$lib/utils";
 	import { onMount } from "svelte";
   import { cubicInOut } from "svelte/easing";
-  import { fade, fly, scale } from "svelte/transition";
+  import { fly } from "svelte/transition";
 
   let mounted = $state(false);
   let startBlinking = $state<boolean>(false);

@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import NameSection from "$src/lib/components/content/NameSection.svelte";
+	import NameSection from "$lib/components/content/NameSection.svelte";
 	import SnapItem from "$lib/components/ui/SnapItem.svelte";
 	import SnapList from "$lib/components/ui/SnapList.svelte";
 
