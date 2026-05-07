@@ -31,7 +31,7 @@
 
 	.blob {
 		@apply pointer-events-none absolute -left-[calc(12.5vh)] top-[calc(6.25vh)]
-			max-md:h-1/3 h-1/2 aspect-square rounded-full blur-[200px];
+			max-lg:h-1/3 h-1/2 aspect-square rounded-full blur-[200px];
 		animation: breathing 2s ease-in-out infinite alternate;
 		background: radial-gradient(circle at center, #ff9a3c, #ff6a00 60%, #ff3c00);
 	}
