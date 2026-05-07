@@ -71,7 +71,7 @@
 
 <style lang='postcss'>
   .angle-bracket {
-    @apply max-md:text-lg text-4xl font-consolas font-semibold
+    @apply max-md:text-lg text-4xl font-firacode font-semibold
       text-slate-700 max-md:mx-3 mx-12 tracking-wide;
   }
 
@@ -88,7 +88,7 @@
   }
 
   .name {
-    @apply font-segoe-ui font-bold max-md:text-4xl text-8xl
+    @apply font-title font-bold max-md:text-4xl text-8xl
       pb-4 !bg-clip-text text-transparent relative z-20;
     background: linear-gradient(90deg, #f97316, #faad28, #f97316);
     background-size: 200% 200%;
@@ -96,7 +96,7 @@
   }
 
   .sub-name {
-    @apply font-consolas font-semibold relative z-10 w-fit;
+    @apply font-firacode font-semibold relative z-10 w-fit;
     text-shadow: 4px 4px 4px #00000080;
   }
 

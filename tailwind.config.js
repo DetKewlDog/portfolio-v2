@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        "consolas": ["Consolas", "monospace"],
-        "segoe-ui": ["Segoe UI", "sans-serif"],
+        "firacode": ["Fira Code", "monospace"],
+        "title": ["Whitney", "-apple-system", "BlinkMacSystemFont", "Segoe, UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
       }
     },
   },
