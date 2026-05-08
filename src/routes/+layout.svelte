@@ -13,6 +13,7 @@
 
 <div class='background'>
 	<div class='blob'></div>
+	<div class="grid"></div>
 
 	<main>
 		{@render children()}
@@ -26,14 +27,20 @@
 	}
 
 	.background {
-		@apply min-h-screen relative overflow-hidden;
+		@apply min-h-svh relative overflow-hidden;
 	}
 
 	.blob {
-		@apply pointer-events-none absolute -left-[calc(12.5vh)] top-[calc(6.25vh)]
+		@apply pointer-events-none absolute -left-[calc(12.5svh)] top-[calc(6.25svh)]
 			max-lg:h-1/3 h-1/2 aspect-square rounded-full blur-[200px];
 		animation: breathing 2s ease-in-out infinite alternate;
 		background: radial-gradient(circle at center, #ff9a3c, #ff6a00 60%, #ff3c00);
+	}
+
+	.grid {
+		@apply fixed inset-0 bg-[length:26px_24px] bg-repeat
+			bg-center pointer-events-none select-none
+			bg-[url('/grid_cross.png')] opacity-[1%];
 	}
 
 	@keyframes breathing {

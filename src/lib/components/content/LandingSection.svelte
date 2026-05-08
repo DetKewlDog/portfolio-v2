@@ -8,8 +8,7 @@
 	import Envelope from "../icons/Envelope.svelte";
 	import GitHub from "../icons/GitHub.svelte";
 	import LinkedIn from "../icons/LinkedIn.svelte";
-
-  import ChevronDown from "@lucide/svelte/icons/chevron-down";
+	import ChevronDown from "../icons/ChevronDown.svelte";
 
   let mounted = $state(false);
   let startBlinking = $state<boolean>(false);
@@ -19,22 +18,22 @@
   });
 
   const widthTransition: ScaleParams = {
-    delay: 100, duration: 400, easing: cubicInOut
+    duration: 400, easing: cubicInOut
   };
   const flyTransitionTop: FlyParams = {
-    y: 35, delay: 400, duration: 600, easing: cubicInOut
+    delay: 200, duration: 600, easing: cubicInOut, y: 35
   };
   const flyTransitionBot: FlyParams = {
-    y: -35, delay: 800, duration: 600, easing: cubicInOut
+    delay: 600, duration: 600, easing: cubicInOut, y: -35
   };
   const fadeTransitionIcons: FadeParams = {
-    delay: 1200, duration: 600, easing: cubicInOut
+    delay: 800, duration: 600, easing: cubicInOut
   };
   const flyTransitionLeft: FlyParams = {
-    x: 48, delay: 1200, duration: 600, easing: cubicInOut
+    delay: 800, duration: 600, easing: cubicInOut, x: 48
   };
   const flyTransitionRight: FlyParams = {
-    x: -48, delay: 1200, duration: 600, easing: cubicInOut
+    delay: 800, duration: 600, easing: cubicInOut, x: -48
   };
 
   let [typewriter, isTyping] = newTypewriter({
@@ -47,8 +46,8 @@
       'games'
     ],
     suffix: '.',
-    typeSpeed: 40,
-    typeCooldown: 4000,
+    typeInterval: 35,
+    typeCooldown: 3000,
   });
 
 </script>
@@ -59,14 +58,14 @@
     <div class='flex items-center'>
       <p class='angle-bracket'>&lt;</p>
       <div class='name-container' transition:width={widthTransition}>
-        <p class='sub-name top' transition:fly={flyTransitionTop}>
+        <p class='mono-text top-text' transition:fly={flyTransitionTop}>
           Hi, I'm
         </p>
 
         <p class='name'>Bar Goldenstein</p>
 
         <p
-          class='sub-name bottom cursor'
+          class='mono-text bottom-text cursor'
           class:blink={!$isTyping && startBlinking}
           transition:fly={flyTransitionBot}
           onintrostart={() => startBlinking = true}
@@ -79,21 +78,23 @@
   </div>
 
   <div class='flex max-lg:gap-4 gap-8'>
-    <div transition:fly={flyTransitionLeft}>
-      <LinkedIn href='https://www.linkedin.com/in/bar-goldenstein' />
+    <div class='social-link' transition:fly={flyTransitionLeft}>
+      <LinkedIn href='https://www.linkedin.com/in/bar-goldenstein' label='LinkedIn' />
     </div>
-    <div transition:fade={fadeTransitionIcons}>
-      <GitHub href='https://github.com/DetKewlDog' />
+    <div class='social-link' transition:fade={fadeTransitionIcons}>
+      <GitHub href='https://github.com/DetKewlDog' label='GitHub' />
     </div>
-    <div transition:fly={flyTransitionRight}>
-      <Envelope href='mailto:bargolden12@gmail.com' />
+    <div class='social-link' transition:fly={flyTransitionRight}>
+      <Envelope href='mailto:bargolden12@gmail.com' label='Mail' />
     </div>
   </div>
 
-  <a class='sub-name about' href='#about' transition:fade={fadeTransitionIcons}>
-    <p>[ Learn More ]</p>
+  <a class='mono-text learn-more' href='#about' transition:fade={fadeTransitionIcons}>
+    <p class='learn-more-text'>
+      Learn More
+    </p>
 
-    <ChevronDown size={20} />
+    <ChevronDown size={20} label='Learn More' class='animate-bounce' />
   </a>
 </section>
 {/if}
@@ -104,61 +105,82 @@
   }
 
   .angle-bracket {
-    @apply max-md:text-lg max-lg:text-2xl text-4xl font-firacode font-semibold
-      text-slate-700 max-md:mx-3 max-lg:mx-6 mx-12 tracking-wide
-      select-none pointer-events-none;
-  }
-
-  .angle-bracket:first-of-type {
-    text-shadow: 2px 0 6px #50505080;
-  }
-  .angle-bracket:first-of-type::after { /* alignment */
-    @apply content-['/'] invisible;
-  }
-  .angle-bracket:last-of-type {
-    text-shadow: -2px 0 6px #50505080;
+    @apply max-md:text-lg max-lg:text-2xl text-4xl
+      font-firacode font-semibold text-slate-700
+      max-md:mx-3 max-lg:mx-6 mx-12 tracking-wide
+      select-none pointer-events-none
+      first-of-type:[text-shadow:2px_0_6px_#50505080]
+      last-of-type:[text-shadow:-2px_0_6px_#50505080]
+      first-of-type:after:content-['/']
+      first-of-type:after:invisible;
   }
 
   .name-container p {
-    @apply whitespace-nowrap text-nowrap transition-all duration-300;
-    filter: drop-shadow(4px 4px 4px #00000080);
+    @apply whitespace-nowrap text-nowrap drop-shadow-lg
+      transition-all duration-300 ease-in-out;
   }
 
   .name {
-    @apply font-title font-bold max-md:text-4xl max-lg:text-6xl text-8xl
-      pb-4 !bg-clip-text text-transparent relative z-20 transition-all duration-300;
+    @apply font-title font-bold pb-4
+      max-md:text-4xl max-lg:text-6xl text-8xl
+      !bg-clip-text text-transparent relative z-20
+      transition-all duration-300 ease-in-out;
     background: linear-gradient(90deg, #f97316, #faad28, #f97316);
     background-size: 200% 200%;
     animation: anim-gradient 2s linear infinite forwards;
   }
 
-  .sub-name {
+  .mono-text {
     @apply font-firacode font-semibold relative z-10 w-fit;
     text-shadow: 4px 4px 4px #00000080;
   }
 
-  .sub-name.top {
+  .top-text {
     @apply max-md:text-sm max-lg:text-xl text-4xl mr-8 justify-self-end;
   }
-  .sub-name.bottom {
-    @apply max-md:text-[11.2px] max-md:leading-[15px] max-lg:text-xl text-2xl -ml-8;
-  }
-  .sub-name.about {
-    @apply max-md:text-sm max-lg:text-lg text-xl
-      max-md:-mt-4 mt-4 flex flex-col items-center
-      md:gap-2 lg:gap-1 hover:text-[#f97316]
-      transition-all duration-300;
+  .bottom-text {
+    @apply max-lg:text-xl text-2xl -ml-8
+      max-md:text-[11.2px] max-md:leading-[15px];
   }
 
-  .sub-name.cursor:after {
+  .cursor:after {
     @apply absolute content-['']
-      h-6 w-2 m-1 bg-white
       max-lg:h-[18px] max-lg:w-1.5 max-lg:m-[3px]
-      max-md:h-3 max-md:w-1 max-md:m-0.5;
+      max-md:h-3 max-md:w-1 max-md:m-0.5
+      h-6 w-2 m-1 bg-white;
     box-shadow: 4px 4px 4px #00000080;
   }
-  .sub-name.cursor.blink:after {
-    animation: anim-blink 1s infinite;
+  .cursor.blink:after {
+    animation: anim-blink .8s infinite;
+  }
+
+  .social-link {
+    @apply hover:text-[#f97316] hover:scale-125
+      transition-all duration-300 ease-in-out;
+  }
+  .social-link:hover, .learn-more:hover {
+    filter: drop-shadow(0 0 2px #f9731640);
+  }
+
+  .learn-more {
+    @apply max-md:text-sm max-lg:text-lg text-xl box-border
+      max-md:-mt-4 mt-4 flex flex-col items-center
+      transition-all duration-300 ease-in-out
+      gap-2 hover:text-[#f97316] hover:scale-110;
+  }
+  .learn-more:hover .learn-more-text {
+    @apply before:pr-5 after:pl-5;
+  }
+
+  .learn-more-text {
+    @apply relative transition-all duration-300 ease-in-out
+      before:content-['[']  after:content-[']']
+      before:right-full     after:left-full
+      before:pr-4           after:pl-4;
+  }
+  .learn-more-text::before, .learn-more-text::after {
+    @apply transition-all duration-300 ease-in-out top-0
+      pointer-events-none select-none inline-block;
   }
 
   @keyframes anim-blink {

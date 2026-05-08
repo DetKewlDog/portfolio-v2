@@ -6,14 +6,14 @@ interface TypeWriterParams {
   prefix?: string;
   options: string[];
   suffix?: string;
-  typeSpeed: number;
+  typeInterval: number;
   typeCooldown: number;
 }
 
 export function newTypewriter({
   prefix = '',
   suffix = '',
-  typeSpeed,
+  typeInterval,
   typeCooldown,
   options,
 }: TypeWriterParams): [Readable<string>, Readable<boolean>] {
@@ -37,7 +37,7 @@ export function newTypewriter({
       // erase
       for (let i = word.length; i >= 0; i--) {
         setText(word.slice(0, i));
-        await sleep(typeSpeed);
+        await sleep(typeInterval);
       }
 
       // next word
@@ -47,7 +47,7 @@ export function newTypewriter({
       // type
       for (let i = 0; i <= nextWord.length; i++) {
         setText(nextWord.slice(0, i));
-        await sleep(typeSpeed);
+        await sleep(typeInterval);
       }
     }
   }

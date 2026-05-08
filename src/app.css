@@ -17,3 +17,15 @@
   font-weight: 600;
   src: url('./fonts/fira-code-v27-latin-600.woff2') format('woff2');
 }
+
+::-webkit-scrollbar {
+  @apply w-[6px];
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-[#f97316];
+}
