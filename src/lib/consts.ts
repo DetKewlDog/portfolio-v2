@@ -49,7 +49,7 @@ export const projects: ProjectEntry[] = [
     featured: true,
   },
   {
-    title: "Portfolio (V2)",
+    title: "Portfolio v2.0",
     description: "This portfolio website! Built using SvelteKit and TypeScript.",
     category: 'Web App',
     href: "https://github.com/DetKewlDog/portfolio-v2",
