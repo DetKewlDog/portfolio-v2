@@ -8,6 +8,6 @@
 
 <style lang='postcss'>
   .snap-list {
-    @apply snap-y snap-mandatory overflow-y-scroll h-svh flex flex-col scroll-smooth;
+    @apply snap-y snap-mandatory overflow-y-scroll h-svh flex flex-col scroll-smooth gap-8;
   }
 </style>

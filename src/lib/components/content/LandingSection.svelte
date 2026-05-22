@@ -53,7 +53,7 @@
 </script>
 
 {#if mounted}
-<section class='landing-section' id='landing'>
+<div class='landing-section'>
   <div class='flex-grow'>
     <div class='flex items-center'>
       <p class='angle-bracket'>&lt;</p>
@@ -96,7 +96,7 @@
 
     <ChevronDown size={20} label='Learn More' class='animate-bounce' />
   </a>
-</section>
+</div>
 {/if}
 
 <style lang='postcss'>

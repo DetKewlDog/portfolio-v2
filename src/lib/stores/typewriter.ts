@@ -26,13 +26,17 @@ export function newTypewriter({
 
   async function typewriterLoop() {
     let index = 0;
+    let isFirstTime = true;
 
     while (true) {
       isTyping.set(false);
-      await sleep(typeCooldown);
+      if (options[index] || isFirstTime)
+        await sleep(typeCooldown);
       isTyping.set(true);
 
-      const word = options[index] + '.';
+      isFirstTime = false;
+
+      const word = options[index] + suffix;
 
       // erase
       for (let i = word.length; i >= 0; i--) {
@@ -42,7 +46,7 @@ export function newTypewriter({
 
       // next word
       index = (index + 1) % options.length;
-      const nextWord = options[index] + '.';
+      const nextWord = options[index] + suffix;
 
       // type
       for (let i = 0; i <= nextWord.length; i++) {

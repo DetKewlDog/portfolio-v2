@@ -1,6 +1,7 @@
 <script lang='ts'>
+	import FeaturedProjects from "$lib/components/content/FeaturedProjects.svelte";
 	import LandingSection from "$lib/components/content/LandingSection.svelte";
-	import SnapItem from "$lib/components/ui/SnapItem.svelte";
+	import SnapSection from "$lib/components/ui/SnapSection.svelte";
 	import SnapList from "$lib/components/ui/SnapList.svelte";
 
 
@@ -8,17 +9,15 @@
 
 
 <SnapList>
-  <SnapItem>
+  <SnapSection id='landing'>
     <LandingSection />
-  </SnapItem>
-  <SnapItem>
-    <section id='about'>
-      <p>Work in Progress</p>
-    </section>
-  </SnapItem>
-  <SnapItem>
+  </SnapSection>
+  <SnapSection id='about'>
+    <FeaturedProjects />
+  </SnapSection>
+  <SnapSection id='timeline'>
     <p>Soon™</p>
-  </SnapItem>
+  </SnapSection>
 </SnapList>
 
 

@@ -17,3 +17,15 @@ export function width(node: HTMLElement, params: ScaleParams) {
     }
   };
 }
+
+export function toDateString(date: Date | null): string | null {
+  if (!date)
+    return null;
+
+  const formatter = new Intl.DateTimeFormat('en-IL', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
+  return formatter.format(date);
+}
