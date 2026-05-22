@@ -77,7 +77,10 @@
         {showOnlyFeatured ? 'Show More' : 'Show Less'}
       </p>
 
-      <ChevronDown size={16} label={showOnlyFeatured ? 'Show More' : 'Show Less'} class='transition-all duration-300 ease-in-out {showOnlyFeatured ? '' : 'rotate-180'}' />
+      <ChevronDown
+        size={16} label={showOnlyFeatured ? 'Show More' : 'Show Less'}
+        class='transition-all duration-1000 ease-in-out {showOnlyFeatured ? '' : 'rotate-[540deg]'}'
+      />
     </button>
   </div>
 </div>
