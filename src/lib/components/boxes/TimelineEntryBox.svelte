@@ -1,61 +1,62 @@
 <script lang="ts">
-	import { ProjectStatus, type ProjectEntry } from "$lib/types";
+	import type { TimelineEntry } from "$lib/types";
 	import { toDateString } from "$lib/utils";
+	import type { Snippet } from "svelte";
 	import ArrowRight from "../icons/ArrowRight.svelte";
 	import Box from "../ui/Box.svelte";
 
-  let { project } : { project: ProjectEntry } = $props();
+  let { entry, smallText } : { entry: TimelineEntry, smallText: Snippet } = $props();
 
-  function openProject() {
-    if (!project.href) return;
-    window.open(project.href, '_blank');
+  function openEntry() {
+    if (!entry.href) return;
+    window.open(entry.href, '_blank');
   }
 </script>
 
-<Box class='box-project w-full' onclick={openProject}>
-  {#if project.image}
-    <img src={project.image} alt={project.title} class='project-img'>
+<Box class='box-entry w-full' onclick={openEntry}>
+  {#if entry.image}
+    <img src={entry.image} alt={entry.title} class='entry-img'>
   {:else}
-    <div class='project-img placeholder-img'>No Image Available</div>
+    <div class='entry-img placeholder-img'>No Image Available</div>
   {/if}
 
-  <div class='project-content'>
-    <div class='project-labels'>
-      <span class='project-smalltext text-[#f97316]'>
-        {project.category}
+  <div class='entry-content'>
+    <div class='entry-labels'>
+      <span class='entry-smalltext text-[#f97316]'>
+        {entry.category}
       </span>
 
       <div class='flex gap-1.5'>
-        {#each project.tags as tag, index (index)}
-          <span class='project-tag'>
+        {#each entry.tags as tag, index (index)}
+          <span class='entry-tag'>
             {tag}
           </span>
         {/each}
       </div>
     </div>
 
-    <h3 class='project-title'>
-      {project.title}
-      <div class='project-divider'></div>
+    <h3 class='entry-title'>
+      {entry.title}
+      <div class='entry-divider'></div>
     </h3>
 
-    <div class='project-labels'>
-      <span class='project-smalltext text-white/50'>
-        {toDateString(project.startDate)} - {toDateString(project.endDate) ?? 'Present'}
+    <div class='entry-labels'>
+      <span class='entry-smalltext text-white/50'>
+        {toDateString(entry.startDate)} - {toDateString(entry.endDate) ?? 'Present'}
       </span>
-      <span class='project-smalltext text-white/50'>
-        {ProjectStatus[project.status]}
+      <span class='entry-smalltext text-white/50'>
+        {@render smallText()}
       </span>
     </div>
 
-    <p class='project-description'>
-      {project.description}
+    <p class='entry-description'>
+      {entry.description}
     </p>
 
-    {#if project.href}
-      <div class='project-visit-site'>
+    {#if entry.href}
+      <div class='entry-visit-site'>
         <span class='leading-[12px] text-[10.8px]'>Take Me There</span>
-        <ArrowRight size={12} label={project.title}
+        <ArrowRight size={12} label={entry.title}
           class='rounded-full border-[2px] border-white/20 duration-300 transition-all ease-in-out'
         />
       </div>
@@ -64,15 +65,15 @@
 </Box>
 
 <style lang='postcss'>
-  .project-content {
+  .entry-content {
     @apply flex flex-col w-full h-full py-3 gap-0.5;
   }
 
-  .project-labels {
+  .entry-labels {
     @apply flex items-center justify-between;
   }
 
-  .project-img {
+  .entry-img {
     @apply rounded-3xl w-full aspect-[16/9];
   }
 
@@ -81,20 +82,20 @@
       font-firacode text-[#7C4827] text-lg;
   }
 
-  .project-smalltext {
+  .entry-smalltext {
     @apply font-firacode text-[9px] tracking-[0.25em] uppercase font-bold;
   }
 
-  .project-tag {
+  .entry-tag {
     @apply font-firacode text-[8px] uppercase tracking-widest bg-[#292929]/45
       text-[#ddd]/90 px-2 py-0.5 rounded border border-[#292929]/65 font-medium;
   }
 
-  .project-description {
+  .entry-description {
     @apply text-[0.88rem] leading-relaxed font-light mt-2 mb-auto;
   }
 
-  .project-visit-site {
+  .entry-visit-site {
     @apply font-bold text-[10px] flex items-center gap-2 relative
       text-white mt-4 font-firacode tracking-[0.15em] px-4 py-1
       uppercase w-fit transition-colors duration-300 ease-in-out
@@ -102,7 +103,7 @@
       before:w-[2px] before:h-full;
   }
 
-  .project-visit-site::before, .project-visit-site::after {
+  .entry-visit-site::before, .entry-visit-site::after {
     @apply content-[''] absolute inset-0 -z-10 origin-bottom-left
       transition-all duration-300 ease-in-out;
     background: linear-gradient(90deg, #f97316, #faad28, #f97316);
@@ -110,15 +111,15 @@
     animation: anim-gradient 2s linear infinite forwards;
   }
 
-  :global(.box-project:hover .project-visit-site) {
+  :global(.box-entry:hover .entry-visit-site) {
     @apply [&_div]:border-white/50 before:scale-y-0 after:scale-100;
   }
 
-  .project-title {
+  .entry-title {
     @apply text-xl md:text-2xl font-bold tracking-tight font-sans mb-1 -mt-1 w-fit;
   }
 
-  .project-divider {
+  .entry-divider {
     @apply h-[2px] w-full scale-x-0
       transition-all duration-300 ease-in-out origin-left;
     background: linear-gradient(90deg, #f97316, #faad28, #f97316);
@@ -126,7 +127,7 @@
     animation: anim-gradient 2s linear infinite forwards;
   }
 
-  :global(.box-project:hover .project-divider) {
+  :global(.box-entry:hover .entry-divider) {
     @apply scale-x-100;
   }
 

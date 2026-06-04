@@ -3,6 +3,7 @@
 	import LandingSection from "$lib/components/content/LandingSection.svelte";
 	import SnapSection from "$lib/components/ui/SnapSection.svelte";
 	import SnapList from "$lib/components/ui/SnapList.svelte";
+	import TreeSection from "$lib/components/content/TreeSection.svelte";
 
 
 </script>
@@ -16,7 +17,7 @@
     <FeaturedProjects />
   </SnapSection>
   <SnapSection id='timeline'>
-    <p>Soon™</p>
+    <TreeSection />
   </SnapSection>
 </SnapList>
 

@@ -5,8 +5,9 @@
   import { fly, type FlyParams } from "svelte/transition";
 
 	import { projects } from "$lib/consts";
-	import ProjectBox from "./ProjectBox.svelte";
 	import ChevronDown from "../icons/ChevronDown.svelte";
+	import type { ProjectEntry } from "$lib/types";
+	import ProjectBox from "$lib/components/boxes/ProjectBox.svelte";
 
   let mounted = $state(false);
   let startBlinking = $state<boolean>(false);
@@ -38,7 +39,7 @@
   });
 
   let shownProjects = $derived(
-    projects
+    (Object.values(projects) as ProjectEntry[])
     .filter(project => !showOnlyFeatured || project.featured)
     .toSorted((a, b) =>
       a.featured && b.featured
@@ -60,7 +61,7 @@
       {$typewriter}
     </p>
 
-    <p class='name'>Featured Projects</p>
+    <p class='title-text'>Featured Projects</p>
   </div>
 
   <div class='projects'>
@@ -98,7 +99,7 @@
       transition-all duration-300 ease-in-out px-3;
   }
 
-  .name {
+  .title-text {
     @apply font-title font-bold pb-4
       max-md:text-3xl max-lg:text-4xl text-6xl
       !bg-clip-text text-transparent relative z-20

@@ -1,17 +1,13 @@
+import type { projects } from "./consts";
+
 export enum ProjectStatus {
   Active,
   Completed,
   Inactive,
 };
 
-export enum EmploymentType {
-  FullTime,
-  PartTime,
-  Contract,
-  Internship
-};
-
-interface TimelineEntry {
+export interface TimelineEntry {
+  entryType: 'project' | 'education' | 'employment';
   title: string;
   description: string;
   category: string;
@@ -23,16 +19,23 @@ interface TimelineEntry {
 }
 
 export interface ProjectEntry extends TimelineEntry {
+  entryType: 'project';
   status: ProjectStatus;
   featured?: boolean;
   isMockImage?: boolean;
 };
 
 export interface EducationEntry extends TimelineEntry {
-  institution: string;
+  entryType: 'education';
+  field: string;
+  projects: (keyof typeof projects)[];
 };
 
 export interface EmploymentEntry extends TimelineEntry {
-  company: string;
-  employmentType: EmploymentType;
-}
+  entryType: 'employment';
+  role: string;
+  employmentType: 'Full-Time' | 'Part-Time' | 'Contract' | 'Internship';
+  projects: (keyof typeof projects)[];
+};
+
+export type WildcardEntry = ProjectEntry | EducationEntry | EmploymentEntry;
