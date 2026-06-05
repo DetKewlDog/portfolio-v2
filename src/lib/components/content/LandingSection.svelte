@@ -8,7 +8,6 @@
 	import Envelope from "../icons/Envelope.svelte";
 	import GitHub from "../icons/GitHub.svelte";
 	import LinkedIn from "../icons/LinkedIn.svelte";
-	import ChevronDown from "../icons/ChevronDown.svelte";
 	import Button from "../ui/Button.svelte";
 
   let mounted = $state(false);

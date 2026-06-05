@@ -99,7 +99,7 @@
 
 <style lang='postcss'>
   .about-section {
-    @apply w-full flex flex-col my-auto min-h-svh
+    @apply w-full flex flex-col my-auto min-h-svh h-full
       max-md:py-2 max-lg:py-4 py-6
       max-md:px-0 max-lg:px-12 px-32;
   }
