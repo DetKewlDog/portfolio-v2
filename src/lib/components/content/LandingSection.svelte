@@ -108,7 +108,7 @@
 
 <style lang='postcss'>
   .landing-section {
-    @apply flex flex-col justify-between items-center h-full py-32 gap-6;
+    @apply flex flex-col justify-between items-center h-full py-32 gap-6 min-h-svh;
   }
 
   .angle-bracket {
