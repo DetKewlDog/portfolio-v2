@@ -154,7 +154,7 @@
   }
 
   .social-link {
-    @apply scale-100 hover:text-[#f97316] hover:scale-125
+    @apply scale-100 hover:text-[#f97316]
       transition-all duration-300 ease-in-out;
 		filter: drop-shadow(4px 4px 4px #00000080);
   }
