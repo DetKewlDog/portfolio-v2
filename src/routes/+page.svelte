@@ -1,11 +1,11 @@
 <script lang='ts'>
-	import FeaturedProjects from "$lib/components/content/FeaturedProjects.svelte";
-	import LandingSection from "$lib/components/content/LandingSection.svelte";
 	import SnapSection from "$lib/components/ui/SnapSection.svelte";
 	import SnapList from "$lib/components/ui/SnapList.svelte";
-	import TreeSection from "$lib/components/content/TreeSection.svelte";
 	import Background from "$lib/components/ui/Background.svelte";
 
+	import LandingSection from "$lib/components/content/LandingSection.svelte";
+	import ProjectsSection from "$lib/components/content/ProjectsSection.svelte";
+	import TimelineSection from "$lib/components/content/TimelineSection.svelte";
 
 </script>
 
@@ -16,10 +16,10 @@
     <LandingSection />
   </SnapSection>
   <SnapSection id='about'>
-    <FeaturedProjects />
+    <ProjectsSection />
   </SnapSection>
   <SnapSection id='timeline'>
-    <TreeSection />
+    <TimelineSection />
   </SnapSection>
 </SnapList>
 
