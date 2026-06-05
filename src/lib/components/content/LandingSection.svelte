@@ -95,14 +95,6 @@
 			Learn More
 		</Button>
 	</div>
-<!--
-  <a class='mono-text learn-more' href='#about' transition:fade={fadeTransitionIcons}>
-    <p class='learn-more-text'>
-      Learn More
-    </p>
-
-    <ChevronDown size={20} label='Learn More' class='animate-bounce' />
-  </a> -->
 </div>
 {/if}
 
