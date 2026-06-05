@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import { onMount } from "svelte";
   import { cubicInOut } from "svelte/easing";
-  import { fly, type FlyParams } from "svelte/transition";
+  import { scale, type ScaleParams } from "svelte/transition";
 
 	import { projects, employments, educations } from "$lib/consts";
 	import TreeContainer from "../tree/TreeContainer.svelte";
@@ -14,8 +14,8 @@
     mounted = true;
   });
 
-  const flyTransitionTitle: FlyParams = {
-    delay: 200, duration: 600, easing: cubicInOut, y: 35
+	const scaleTransitionTitle: ScaleParams = {
+    delay: 300, duration: 400, easing: cubicInOut, opacity: 0, start: 0.85
   };
   
   function createProject(project: ProjectEntry, branchName: string): Node {
@@ -129,9 +129,9 @@
 
 {#if mounted}
 <div class='tree-section'>
-  <div class='tree-title' transition:fly={flyTransitionTitle}>
-    <p class='title-text'>The journey so far.</p>
-  </div>
+  <p class='title-text' transition:scale={scaleTransitionTitle}>
+		The journey so far.
+	</p>
 
   <div class='tree-container'>
     <TreeContainer branches={allBranches} importantBranches={['employment', 'education']} />
@@ -152,8 +152,8 @@
   }
 
   .title-text {
-    @apply font-title font-bold pb-4
-      max-md:text-3xl max-lg:text-4xl text-6xl
+    @apply font-switzer font-bold pb-4 origin-center
+      max-md:text-3xl max-lg:text-4xl text-6xl w-fit
       !bg-clip-text text-transparent relative z-20
       transition-all duration-300 ease-in-out;
     background: linear-gradient(90deg, #f97316, #faad28, #f97316);

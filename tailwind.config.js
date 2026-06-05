@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         "firacode": ["Fira Code", "monospace"],
+        "switzer": ["Switzer", "sans-serif"],
         "title": ["Whitney", "-apple-system", "BlinkMacSystemFont", "Segoe, UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
       }
     },

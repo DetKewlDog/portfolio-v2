@@ -9,6 +9,7 @@
 	import GitHub from "../icons/GitHub.svelte";
 	import LinkedIn from "../icons/LinkedIn.svelte";
 	import ChevronDown from "../icons/ChevronDown.svelte";
+	import Button from "../ui/Button.svelte";
 
   let mounted = $state(false);
   let startBlinking = $state<boolean>(false);
@@ -89,13 +90,19 @@
     </div>
   </div>
 
+	<div transition:fade={fadeTransitionIcons}>
+		<Button href='#about'>
+			Learn More
+		</Button>
+	</div>
+<!--
   <a class='mono-text learn-more' href='#about' transition:fade={fadeTransitionIcons}>
     <p class='learn-more-text'>
       Learn More
     </p>
 
     <ChevronDown size={20} label='Learn More' class='animate-bounce' />
-  </a>
+  </a> -->
 </div>
 {/if}
 
@@ -106,28 +113,28 @@
 
   .angle-bracket {
     @apply max-md:text-lg max-lg:text-2xl text-4xl
-      font-firacode font-semibold text-slate-700
+      font-firacode font-semibold text-slate-400
       max-md:mx-3 max-lg:mx-6 mx-12 tracking-wide
       select-none pointer-events-none
-      first-of-type:[text-shadow:2px_0_6px_#50505080]
-      last-of-type:[text-shadow:-2px_0_6px_#50505080]
       first-of-type:after:content-['/']
       first-of-type:after:invisible;
+    text-shadow: 4px 4px 4px #00000080;
   }
 
   .name-container p {
-    @apply whitespace-nowrap text-nowrap drop-shadow-lg
+    @apply whitespace-nowrap text-nowrap
       transition-all duration-300 ease-in-out;
   }
 
   .name {
-    @apply font-title font-bold pb-4
+    @apply font-switzer font-bold pb-4
       max-md:text-4xl max-lg:text-6xl text-8xl
       !bg-clip-text text-transparent relative z-20
       transition-all duration-300 ease-in-out;
     background: linear-gradient(90deg, #f97316, #faad28, #f97316);
     background-size: 200% 200%;
     animation: anim-gradient 2s linear infinite forwards;
+		filter: drop-shadow(4px 4px 4px #00000080);
   }
 
   .mono-text {
@@ -155,33 +162,16 @@
   }
 
   .social-link {
-    @apply hover:text-[#f97316] hover:scale-125
+    @apply scale-100 hover:text-[#f97316] hover:scale-125
       transition-all duration-300 ease-in-out;
+		filter: drop-shadow(4px 4px 4px #00000080);
   }
   .social-link:hover, .learn-more:hover {
     filter: drop-shadow(0 0 2px #f9731640);
   }
-
-  .learn-more {
-    @apply max-md:text-sm max-lg:text-lg text-xl box-border
-      max-md:-mt-4 mt-4 flex flex-col items-center
-      transition-all duration-300 ease-in-out
-      gap-2 hover:text-[#f97316] hover:scale-110;
-  }
-  .learn-more:hover .learn-more-text {
-    @apply before:pr-5 after:pl-5;
-  }
-
-  .learn-more-text {
-    @apply relative transition-all duration-300 ease-in-out
-      before:content-['[']  after:content-[']']
-      before:right-full     after:left-full
-      before:pr-4           after:pl-4;
-  }
-  .learn-more-text::before, .learn-more-text::after {
-    @apply transition-all duration-300 ease-in-out top-0
-      pointer-events-none select-none inline-block;
-  }
+	.social-link:hover {
+		transform: scale(1.15) rotate(-4deg);
+	}
 
   @keyframes anim-blink {
     0%, 49% { visibility: hidden; }

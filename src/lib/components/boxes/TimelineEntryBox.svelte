@@ -37,7 +37,7 @@
 
     <h3 class='entry-title'>
       {entry.title}
-      <div class='entry-divider'></div>
+      <div class='entry-accent'></div>
     </h3>
 
     <div class='entry-labels'>
@@ -55,9 +55,11 @@
 
     {#if entry.href}
       <div class='entry-visit-site'>
-        <span class='leading-[12px] text-[10.8px]'>Take Me There</span>
+        <span class='leading-[12px] text-[10.8px]' data-attr="Take Me There">
+					Take Me There
+				</span>
         <ArrowRight size={12} label={entry.title}
-          class='rounded-full border-[2px] border-white/20 duration-300 transition-all ease-in-out'
+          class='duration-300 transition-all ease-in-out'
         />
       </div>
     {/if}
@@ -74,7 +76,7 @@
   }
 
   .entry-img {
-    @apply rounded-3xl w-full aspect-[16/9];
+    @apply w-full aspect-[16/9];
   }
 
   .placeholder-img {
@@ -87,39 +89,39 @@
   }
 
   .entry-tag {
-    @apply font-firacode text-[8px] uppercase tracking-widest bg-[#292929]/45
-      text-[#ddd]/90 px-2 py-0.5 rounded border border-[#292929]/65 font-medium;
+    @apply font-firacode text-[8px] uppercase tracking-widest bg-[#ffffff08]
+      text-[#c8c7c2] px-2 py-0.5 border border-[#ffffff14] font-medium;
   }
 
   .entry-description {
-    @apply text-[0.88rem] leading-relaxed font-light mt-2 mb-auto;
+    @apply text-[0.88rem] leading-relaxed font-light mt-2 mb-auto text-[#c8c7c2] font-switzer;
   }
 
   .entry-visit-site {
     @apply font-bold text-[10px] flex items-center gap-2 relative
       text-white mt-4 font-firacode tracking-[0.15em] px-4 py-1
-      uppercase w-fit transition-colors duration-300 ease-in-out
-      after:h-[2px] after:w-full after:scale-x-0 after:mt-auto
-      before:w-[2px] before:h-full;
+      uppercase w-fit transition-all duration-300 ease-in-out
+      after:w-[2px] after:h-full isolate;
   }
 
-  .entry-visit-site::before, .entry-visit-site::after {
-    @apply content-[''] absolute inset-0 -z-10 origin-bottom-left
+  .entry-visit-site::after {
+    @apply content-[''] absolute inset-0 origin-bottom-left
       transition-all duration-300 ease-in-out;
     background: linear-gradient(90deg, #f97316, #faad28, #f97316);
     background-size: 200% 200%;
     animation: anim-gradient 2s linear infinite forwards;
+		mix-blend-mode:difference;
   }
 
   :global(.box-entry:hover .entry-visit-site) {
-    @apply [&_div]:border-white/50 before:scale-y-0 after:scale-100;
+    @apply [&_div]:border-white/50 after:w-full gap-3 !text-[#f97316];
   }
 
   .entry-title {
-    @apply text-xl md:text-2xl font-bold tracking-tight font-sans mb-1 -mt-1 w-fit;
+    @apply text-xl md:text-2xl font-bold tracking-tight font-sans mb-1 -mt-1 w-fit font-switzer;
   }
 
-  .entry-divider {
+  .entry-accent {
     @apply h-[2px] w-full scale-x-0
       transition-all duration-300 ease-in-out origin-left;
     background: linear-gradient(90deg, #f97316, #faad28, #f97316);
@@ -127,7 +129,7 @@
     animation: anim-gradient 2s linear infinite forwards;
   }
 
-  :global(.box-entry:hover .entry-divider) {
+  :global(.box-entry:hover .entry-accent) {
     @apply scale-x-100;
   }
 

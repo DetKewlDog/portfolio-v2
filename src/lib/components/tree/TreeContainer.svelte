@@ -1,10 +1,12 @@
 <script lang='ts'>
 	import type { TimelineEntry, WildcardEntry } from "$lib/types";
 	import { toDateString } from "$lib/utils";
+	import { scale } from "svelte/transition";
 	import EducationBox from "../boxes/EducationBox.svelte";
 	import EmploymentBox from "../boxes/EmploymentBox.svelte";
 	import ProjectBox from "../boxes/ProjectBox.svelte";
 	import type { Branch, CellVariants, Node } from "./types";
+	import { cubicInOut } from "svelte/easing";
 
   let { branches, importantBranches } : { branches: Branch[], importantBranches: string[] } = $props();
 
@@ -114,7 +116,10 @@
   <tbody>
 
     {#each nodesAsRows as [node, cellVariants, shouldBold], rowIndex (rowIndex)}
-      <tr class='tree-row' onclick={() => selectedEntry = node?.value as WildcardEntry}>
+      <tr
+				class='tree-row'
+				onclick={() => selectedEntry = node?.value as WildcardEntry}
+			>
         <td class='w-fit pr-4'>
           {#if node}
             {toDateString(node.date)}
@@ -128,7 +133,15 @@
             : variants.length - index
           }
 
-          <td class='tree-cell'>
+					{@const invRowIndex = nodesAsRows.length - rowIndex - 1}
+					{@const invColIndex = cellVariants.length - index - 1}
+
+          <td class='tree-cell' in:scale|global={{
+						delay: 400 + (invRowIndex + invColIndex) * 100,
+						duration: 400,
+						easing: cubicInOut,
+						start: 0.85
+					}}>
 
             <span
               class="tree-node {variants.join(' ')}"

@@ -35,6 +35,6 @@
   .section {
     @apply snap-start snap-always text-white
       p-4 w-full h-svh flex justify-center
-      items-center flex-[1_0_auto];
+      items-center flex-[1_0_auto] relative;
   }
 </style>

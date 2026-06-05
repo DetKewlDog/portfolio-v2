@@ -2,12 +2,13 @@
 	import { newTypewriter } from "$lib/stores/typewriter";
 	import { onMount } from "svelte";
   import { cubicInOut } from "svelte/easing";
-  import { fly, type FlyParams } from "svelte/transition";
+  import { fly, scale, type FadeParams, type FlyParams, type ScaleParams } from "svelte/transition";
 
 	import { projects } from "$lib/consts";
 	import ChevronDown from "../icons/ChevronDown.svelte";
 	import type { ProjectEntry } from "$lib/types";
 	import ProjectBox from "$lib/components/boxes/ProjectBox.svelte";
+	import Button from "../ui/Button.svelte";
 
   let mounted = $state(false);
   let startBlinking = $state<boolean>(false);
@@ -17,11 +18,11 @@
     mounted = true;
   });
 
-  const flyTransitionTitle: FlyParams = {
-    delay: 200, duration: 600, easing: cubicInOut, y: 35
+  const scaleTransitionTitle: ScaleParams = {
+    delay: 300, duration: 400, easing: cubicInOut, opacity: 0, start: 0.85
   };
   const flyTransitionTop: FlyParams = {
-    delay: 400, duration: 600, easing: cubicInOut, y: 35
+    delay: 200, duration: 400, easing: cubicInOut, x: 35
   };
 
   let [typewriter, isTyping] = newTypewriter({
@@ -51,7 +52,7 @@
 
 {#if mounted}
 <div class='about-section'>
-  <div class='about-title' transition:fly={flyTransitionTitle}>
+  <div class='about-title'>
     <p
       class='mono-text opacity-50 typewriter cursor'
       class:blink={!$isTyping && startBlinking}
@@ -61,28 +62,37 @@
       {$typewriter}
     </p>
 
-    <p class='title-text'>Featured Projects</p>
+    <p class='title-text' transition:scale={scaleTransitionTitle}>
+			Featured Projects
+		</p>
   </div>
 
   <div class='projects'>
     {#each shownProjects as project, index (index)}
-      <div in:fly|global={{
-        delay: 400 + index * 100, duration: 400, easing: cubicInOut, y: 35
+      <div in:scale|global={{
+        delay: 400 + index * 100, duration: 400, easing: cubicInOut, opacity: 0, start: 0.85
       }}>
         <ProjectBox {project} />
       </div>
     {/each}
 
-    <button class='mono-text show-more' onclick={() => showOnlyFeatured = !showOnlyFeatured}>
-      <p class='show-more-text'>
-        {showOnlyFeatured ? 'Show More' : 'Show Less'}
-      </p>
+		<div
+			class='col-span-full m-auto'
+			transition:scale={{ delay: 700, duration: 400, easing: cubicInOut, opacity: 0, start: 0.85 }}
+		>
+			<Button onclick={() => showOnlyFeatured = !showOnlyFeatured}>
+				{#if showOnlyFeatured}
+					Show More
+				{:else}
+					Show Less
+				{/if}
 
-      <ChevronDown
-        size={16} label={showOnlyFeatured ? 'Show More' : 'Show Less'}
-        class='transition-all duration-1000 ease-in-out {showOnlyFeatured ? '' : 'rotate-[540deg]'}'
-      />
-    </button>
+				<ChevronDown
+					size={16} label={showOnlyFeatured ? 'Show More' : 'Show Less'}
+					class='transition-all duration-1000 ease-in-out {showOnlyFeatured ? '' : 'rotate-[540deg]'}'
+				/>
+			</Button>
+		</div>
   </div>
 </div>
 {/if}
@@ -100,10 +110,10 @@
   }
 
   .title-text {
-    @apply font-title font-bold pb-4
+    @apply font-switzer font-bold pb-4 w-fit
       max-md:text-3xl max-lg:text-4xl text-6xl
       !bg-clip-text text-transparent relative z-20
-      transition-all duration-300 ease-in-out;
+      transition-all duration-300 ease-in-out origin-center;
     background: linear-gradient(90deg, #f97316, #faad28, #f97316);
     background-size: 200% 200%;
     animation: anim-gradient 2s linear infinite forwards;
@@ -132,31 +142,6 @@
   }
   .cursor.blink:after {
     animation: anim-blink .8s infinite;
-  }
-
-  .show-more:hover {
-    filter: drop-shadow(0 0 2px #f9731640);
-  }
-
-  .show-more {
-    @apply max-lg:text-sm text-base box-border
-      max-md:-mt-4 mt-4 flex flex-col items-center
-      transition-all duration-300 ease-in-out col-span-full m-auto
-      hover:text-[#f97316] hover:scale-110;
-  }
-  .show-more:hover .show-more-text {
-    @apply before:pr-5 after:pl-5;
-  }
-
-  .show-more-text {
-    @apply relative transition-all duration-300 ease-in-out
-      before:content-['[']  after:content-[']']
-      before:right-full     after:left-full
-      before:pr-4           after:pl-4;
-  }
-  .show-more-text::before, .show-more-text::after {
-    @apply transition-all duration-300 ease-in-out top-0
-      pointer-events-none select-none inline-block;
   }
 
   @keyframes anim-blink {

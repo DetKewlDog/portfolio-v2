@@ -42,6 +42,38 @@
   src: url('./fonts/fira-code-v27-latin-700.woff2') format('woff2');
 }
 
+@font-face {
+  font-display: swap;
+  font-family: 'Switzer';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/switzer-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Switzer';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./fonts/switzer-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Switzer';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./fonts/switzer-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Switzer';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/switzer-700.woff2') format('woff2');
+}
+
 ::-webkit-scrollbar {
   @apply w-[6px];
 }
