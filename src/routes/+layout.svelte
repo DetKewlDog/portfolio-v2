@@ -4,23 +4,28 @@
 
 	import { onMount } from 'svelte';
 	import Lenis from 'lenis';
-	import 'lenis/dist/lenis.css';
 
 	import '../app.css';
 
 	let { children } = $props();
 
-	// onMount(() => {
-	// 	const lenis = new Lenis({
-	// 		autoRaf: true,
-	// 		duration: 1.2,
-	// 		smoothWheel: true
-	// 	});
+	onMount(() => {
+		const lenis = new Lenis();
 
-	// 	return () => {
-	// 		lenis.destroy();
-	// 	};
-	// });
+		let frame: number;
+
+		function raf(time: number) {
+			lenis.raf(time);
+			frame = requestAnimationFrame(raf);
+		}
+
+		frame = requestAnimationFrame(raf);
+
+		return () => {
+			cancelAnimationFrame(frame);
+			lenis.destroy();
+		};
+	});
 </script>
 
 <svelte:head>
@@ -38,8 +43,5 @@
 
 
 <style lang='postcss'>
-	:global(body) {
-		@apply relative;
-		background: radial-gradient(circle at center, #3d2f18, #0b0b0b 70%);
-	}
+
 </style>

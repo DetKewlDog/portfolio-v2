@@ -89,3 +89,12 @@
 button {
   outline: none !important;
 }
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	position: relative;
+	background: #0b0b0b;
+}

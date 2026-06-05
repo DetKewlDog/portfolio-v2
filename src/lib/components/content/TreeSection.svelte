@@ -141,7 +141,7 @@
 
 <style lang='postcss'>
   .tree-section {
-    @apply w-full flex flex-col my-auto h-svh
+    @apply w-full flex flex-col my-auto min-h-svh
       max-md:py-2 max-lg:py-4 py-6
       max-md:px-0 max-lg:px-12 px-32;
   }
@@ -167,7 +167,7 @@
   }
 
   .tree-container {
-    @apply w-full h-full overflow-y-scroll p-3 !scroll-smooth transition-all duration-300;
+    @apply w-full h-full p-3 !scroll-smooth transition-all duration-300;
   }
 
   @keyframes anim-gradient {

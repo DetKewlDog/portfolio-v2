@@ -33,8 +33,8 @@
 
 <style lang='postcss'>
   .section {
-    @apply snap-start snap-always text-white
-      p-4 w-full h-svh flex justify-center
+    @apply text-white
+      px-4 w-full min-h-svh flex justify-center
       items-center flex-[1_0_auto] relative;
   }
 </style>

@@ -10,7 +10,7 @@
 </script>
 
 
-<div class='background-container' class:fixed>
+<div class='background-container' style={fixed ? 'position: fixed' : ''}>
 	{#if darkBase}
 		<div class='dark-base'></div>
 	{/if}
@@ -35,7 +35,7 @@
 
 <style lang='postcss'>
 	.background-container {
-		@apply absolute inset-0 pointer-events-none -z-10 overflow-hidden;
+		@apply absolute inset-0 pointer-events-none -z-10 overflow-hidden min-h-svh max-h-svh;
 	}
 
 	.dark-base {
@@ -71,7 +71,7 @@
 	}
 
 	.grid {
-		@apply fixed inset-0 bg-[length:24px_22px] bg-repeat
+		@apply absolute inset-0 bg-[length:24px_22px] bg-repeat
 			bg-center select-none bg-[url('/grid_cross.png')]
 			opacity-[3%] p-4 bg-clip-content;
 	}

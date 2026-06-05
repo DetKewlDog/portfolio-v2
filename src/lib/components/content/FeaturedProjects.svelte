@@ -51,7 +51,7 @@
 </script>
 
 {#if mounted}
-<div class='about-section'>
+<div class='about-section' class:h-svh={showOnlyFeatured}>
   <div class='about-title'>
     <p
       class='mono-text opacity-50 typewriter cursor'
@@ -99,7 +99,7 @@
 
 <style lang='postcss'>
   .about-section {
-    @apply w-full flex flex-col my-auto h-svh
+    @apply w-full flex flex-col my-auto min-h-svh
       max-md:py-2 max-lg:py-4 py-6
       max-md:px-0 max-lg:px-12 px-32;
   }
@@ -130,7 +130,7 @@
 
   .projects {
     @apply grid max-sm:grid-cols-1 max-lg:grid-cols-2 grid-cols-3 gap-8
-      w-full h-full overflow-y-scroll p-3 !scroll-smooth transition-all duration-300;
+      w-full h-full p-3 transition-all duration-300;
   }
 
   .cursor:after {

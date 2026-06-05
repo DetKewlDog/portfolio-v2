@@ -7,6 +7,9 @@
 	import ProjectBox from "../boxes/ProjectBox.svelte";
 	import type { Branch, CellVariants, Node } from "./types";
 	import { cubicInOut } from "svelte/easing";
+	import CodeCommit from "../icons/CodeCommit.svelte";
+	import OpenBook from "../icons/OpenBook.svelte";
+	import Briefcase from "../icons/Briefcase.svelte";
 
   let { branches, importantBranches } : { branches: Branch[], importantBranches: string[] } = $props();
 
@@ -120,7 +123,12 @@
 				class='tree-row'
 				onclick={() => selectedEntry = node?.value as WildcardEntry}
 			>
-        <td class='w-fit pr-4'>
+        <td class='w-fit pr-4 text-gray-300' in:scale|global={{
+					delay: 400 + rowIndex * 100,
+					duration: 400,
+					easing: cubicInOut,
+					start: 0.85
+				}}>
           {#if node}
             {toDateString(node.date)}
           {/if}
@@ -133,11 +141,8 @@
             : variants.length - index
           }
 
-					{@const invRowIndex = nodesAsRows.length - rowIndex - 1}
-					{@const invColIndex = cellVariants.length - index - 1}
-
           <td class='tree-cell' in:scale|global={{
-						delay: 400 + (invRowIndex + invColIndex) * 100,
+						delay: 400 + (rowIndex + index + 1) * 100,
 						duration: 400,
 						easing: cubicInOut,
 						start: 0.85
@@ -152,8 +157,21 @@
         {/each}
 
         {#if node}
-          <td class='w-full text-nowrap' class:font-bold={shouldBold}>
-            {node.title}
+					{@const entry = node.value as TimelineEntry}
+          <td class='node-title {shouldBold ? 'font-bold' : 'text-[#c8c7c2]'}' in:scale|global={{
+						delay: 400 + (rowIndex + cellVariants[0].length + 1) * 100,
+						duration: 400,
+						easing: cubicInOut,
+						start: 0.85
+					}}>
+						{#if entry.entryType === 'project'}
+							<CodeCommit label='Project' size={16} />
+						{:else if entry.entryType === 'education'}
+							<OpenBook label='Education' size={16} />
+						{:else if entry.entryType === 'employment'}
+							<Briefcase label='Employment' size={16} />
+						{/if}
+						{node.title}
           </td>
         {/if}
 
@@ -163,7 +181,7 @@
   </tbody>
   </table>
 
-  <div class='w-[400px]'>
+  <div class='w-[400px] h-fit'>
     {#if selectedEntry?.entryType === 'project'}
       <ProjectBox project={selectedEntry} />
     {:else if selectedEntry?.entryType === 'education'}
@@ -176,8 +194,17 @@
 
 <style lang='postcss'>
   .tree-row {
-    @apply w-full [&_td]:!p-0;
+    @apply w-full [&_td]:!p-0 relative font-switzer cursor-pointer align-middle;
   }
+
+	.node-title {
+		@apply w-full text-nowrap transition-all duration-300 ease-in-out
+			relative flex items-center gap-2 h-8;
+	}
+
+	.tree-row:hover .node-title {
+		@apply text-[#f97316] translate-x-4;
+	}
 
   .tree-cell {
     @apply w-8 h-8 aspect-square;
