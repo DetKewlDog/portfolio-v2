@@ -115,71 +115,75 @@
 </script>
 
 <div class='flex max-lg:flex-col max-lg:items-center gap-8 flex-auto'>
-  <table class='max-w-svw max-lg:scale-50'>
-  <tbody>
+  <div class='overflow-x-hidden w-svw px-4'>
+	<div class='overflow-x-scroll'>
+		<table>
+		<tbody>
 
-    {#each nodesAsRows as [node, cellVariants, shouldBold], rowIndex (rowIndex)}
-      <tr
-				class='tree-row'
-				onclick={() => selectedEntry = node?.value as WildcardEntry}
-			>
-        <td class='w-fit pr-4 text-gray-300' in:scale|global={{
-					delay: 400 + rowIndex * 100,
-					duration: 400,
-					easing: cubicInOut,
-					start: 0.85
-				}}>
-          {#if node}
-            {toDateString(node.date)}
-          {/if}
-        </td>
-
-        {#each cellVariants as variants, index (rowIndex + '-' + index)}
-          {@const widthMul =
-            variants.includes('line-end') && rowIndex + 1 < nodesAsRows.length
-            ? nodesAsRows[rowIndex + 1][1].length - index - 1
-            : variants.length - index
-          }
-
-          <td class='tree-cell' in:scale|global={{
-						delay: 400 + (rowIndex + index + 1) * 100,
+			{#each nodesAsRows as [node, cellVariants, shouldBold], rowIndex (rowIndex)}
+				<tr
+					class='tree-row'
+					onclick={() => selectedEntry = node?.value as WildcardEntry}
+				>
+					<td class='w-fit pr-4 text-gray-300' in:scale|global={{
+						delay: 400 + rowIndex * 100,
 						duration: 400,
 						easing: cubicInOut,
 						start: 0.85
 					}}>
-
-            <span
-              class="tree-node {variants.join(' ')}"
-              style="--w-mul: {widthMul}; --branch-col: {colorPalette[index]}"
-            ></span>
-
-          </td>
-        {/each}
-
-        {#if node}
-					{@const entry = node.value as TimelineEntry}
-          <td class='node-title {shouldBold ? 'font-bold' : 'text-[#c8c7c2]'}' in:scale|global={{
-						delay: 400 + (rowIndex + cellVariants[0].length + 1) * 100,
-						duration: 400,
-						easing: cubicInOut,
-						start: 0.85
-					}}>
-						{#if entry.entryType === 'project'}
-							<CodeCommit label='Project' size={16} />
-						{:else if entry.entryType === 'education'}
-							<OpenBook label='Education' size={16} />
-						{:else if entry.entryType === 'employment'}
-							<Briefcase label='Employment' size={16} />
+						{#if node}
+							{toDateString(node.date)}
 						{/if}
-						{node.title}
-          </td>
-        {/if}
+					</td>
 
-      </tr>
-    {/each}
+					{#each cellVariants as variants, index (rowIndex + '-' + index)}
+						{@const widthMul =
+							variants.includes('line-end') && rowIndex + 1 < nodesAsRows.length
+							? nodesAsRows[rowIndex + 1][1].length - index - 1
+							: variants.length - index
+						}
 
-  </tbody>
-  </table>
+						<td class='tree-cell' in:scale|global={{
+							delay: 400 + (rowIndex + index + 1) * 100,
+							duration: 400,
+							easing: cubicInOut,
+							start: 0.85
+						}}>
+
+							<span
+								class="tree-node {variants.join(' ')}"
+								style="--w-mul: {widthMul}; --branch-col: {colorPalette[index]}"
+							></span>
+
+						</td>
+					{/each}
+
+					{#if node}
+						{@const entry = node.value as TimelineEntry}
+						<td class='node-title {shouldBold ? 'font-bold' : 'text-[#c8c7c2]'}' in:scale|global={{
+							delay: 400 + (rowIndex + cellVariants[0].length + 1) * 100,
+							duration: 400,
+							easing: cubicInOut,
+							start: 0.85
+						}}>
+							{#if entry.entryType === 'project'}
+								<CodeCommit label='Project' size={16} />
+							{:else if entry.entryType === 'education'}
+								<OpenBook label='Education' size={16} />
+							{:else if entry.entryType === 'employment'}
+								<Briefcase label='Employment' size={16} />
+							{/if}
+							{node.title}
+						</td>
+					{/if}
+
+				</tr>
+			{/each}
+
+		</tbody>
+		</table>
+		</div>
+	</div>
 
   <div class='w-[400px] max-lg:w-[320px] h-fit'>
     {#if selectedEntry?.entryType === 'project'}
