@@ -115,8 +115,8 @@
 </script>
 
 <div class='flex max-lg:flex-col max-lg:items-center gap-8 flex-auto'>
-  <div class='overflow-x-hidden w-svw px-4'>
-	<div class='overflow-x-scroll'>
+  <div class='max-lg:overflow-x-hidden max-lg:w-svw px-4'>
+	<div class='max-lg:overflow-x-scroll'>
 		<table>
 		<tbody>
 
@@ -185,7 +185,7 @@
 		</div>
 	</div>
 
-  <div class='w-[400px] max-lg:w-[320px] h-fit'>
+  <div class='w-[400px] max-lg:w-[320px] h-fit flex-grow'>
     {#if selectedEntry?.entryType === 'project'}
       <ProjectBox project={selectedEntry} />
     {:else if selectedEntry?.entryType === 'education'}
