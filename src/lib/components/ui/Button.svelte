@@ -1,34 +1,38 @@
 <script lang='ts'>
 	import type { Snippet } from "svelte";
 
-	type ButtonOptions = {
-		onclick: (event: MouseEvent) => void;
-	} | {
-		href: string;
-	};
-
-	let { children, class: className = '', spin = true, ...rest } : {
+	type ButtonProps = {
 		children: Snippet;
 		class?: string;
 		spin?: boolean;
-	} & ButtonOptions = $props();
+	} & (
+		| { onclick: (event: MouseEvent) => void }
+		| { href: string }
+	);
+
+	let {
+		children,
+		class: className = '',
+		spin = true,
+		...rest
+	}: ButtonProps = $props();
 
 
 </script>
 
-{#if 'onclick' in rest}
-	<button class='btn {className}' class:spin onclick={rest.onclick}>
-		<div class='btn-content'>
-			{@render children()}
-		</div>
-	</button>
-{:else}
-	<a class='btn {className}' class:spin href={rest.href}>
-		<div class='btn-content'>
-			{@render children()}
-		</div>
-	</a>
-{/if}
+<svelte:element
+	this={'onclick' in rest ? 'button' : 'a'}
+	class="btn {className}"
+	class:spin
+	onclick={'onclick' in rest ? rest.onclick : undefined}
+	href={'href' in rest ? rest.href : undefined}
+	role="button"
+	tabindex="0"
+>
+	<div class="btn-content">
+		{@render children()}
+	</div>
+</svelte:element>
 
 <style lang='postcss'>
 	@property --gradient-angle {
@@ -52,6 +56,7 @@
 			border border-solid border-transparent justify-center items-center inline-flex overflow-hidden;
 		transition: all .8s cubic-bezier(.25, 1, .5, 1);
 		box-shadow: inset 0 1px #ffffff0f, inset 0 -1px #0003;
+
 		border-image:
 			conic-gradient(
 				from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
@@ -69,6 +74,7 @@
 			flex justify-center items-center gap-[.55rem];
 		padding: 1.1rem 2rem;
 	}
+
 	.btn-content::before {
 		--size: 1.5rem;
 		@apply content-[''] absolute -left-[calc(var(--size)/2)] -top-[calc(var(--size)/2)];
@@ -82,6 +88,7 @@
 			!bg-clip-content bg-repeat transition-all duration-300 ease-in-out;
 		background-size: 4px 4px !important;
 		background: radial-gradient(circle at 2px 2px, #faad28 .5px, transparent 0) padding-box;
+		transition-property: --gradient-angle-offset, --gradient-percent;
 	}
 
 	.btn.spin::before {
@@ -106,12 +113,12 @@
 		--gradient-percent: 30%;
 	}
 
-	.btn:after {
+	.btn.spin:after {
 		@apply content-[''] -z-[1] absolute aspect-square animate-spin p-[50%] box-content;
-    background: linear-gradient(-50deg, transparent, #f97316, transparent);
-    opacity: .18;
-    width: 100%;
-    mask-image: radial-gradient(circle at bottom, #0000 40%, #000);
+		background: linear-gradient(-50deg, transparent, #f97316, transparent);
+		opacity: .18;
+		width: 100%;
+		mask-image: radial-gradient(circle at bottom, #0000 40%, #000);
 		animation-duration: 6s;
 	}
 
@@ -120,14 +127,11 @@
 		animation-composition: add;
 		transition-property: --gradient-angle-offset, --gradient-percent;
 	}
-	.btn::before {
-		transition-property: --gradient-angle-offset, --gradient-percent;
-	}
 
 	.btn:hover {
 		animation-play-state: running;
 		--gradient-percent: 20%;
-    --gradient-angle-offset: 95deg;
+		--gradient-angle-offset: 95deg;
 	}
 
 	.btn:hover .btn-content::before {

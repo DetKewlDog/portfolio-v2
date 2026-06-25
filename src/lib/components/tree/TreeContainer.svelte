@@ -114,8 +114,8 @@
   let selectedEntry: WildcardEntry | null = $state(null);
 </script>
 
-<div class='flex gap-8'>
-  <table>
+<div class='flex max-lg:flex-col max-lg:items-center gap-8 flex-auto'>
+  <table class='max-w-svw max-lg:scale-50'>
   <tbody>
 
     {#each nodesAsRows as [node, cellVariants, shouldBold], rowIndex (rowIndex)}
@@ -181,7 +181,7 @@
   </tbody>
   </table>
 
-  <div class='w-[400px] h-fit'>
+  <div class='w-[400px] max-lg:w-[320px] h-fit'>
     {#if selectedEntry?.entryType === 'project'}
       <ProjectBox project={selectedEntry} />
     {:else if selectedEntry?.entryType === 'education'}

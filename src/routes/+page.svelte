@@ -18,9 +18,9 @@
   <SnapSection id='about'>
     <ProjectsSection />
   </SnapSection>
-  <SnapSection id='timeline'>
+  <!-- <SnapSection id='timeline'>
     <TimelineSection />
-  </SnapSection>
+  </SnapSection> -->
 </SnapList>
 
 
