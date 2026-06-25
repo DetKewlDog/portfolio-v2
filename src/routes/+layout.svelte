@@ -1,5 +1,4 @@
 <script lang="ts">
-	import favicon from '$lib/assets/favicon.svg';
 	import Background from '$lib/components/ui/Background.svelte';
 
 	import { onMount } from 'svelte';
@@ -27,11 +26,6 @@
 		};
 	});
 </script>
-
-<svelte:head>
-	<link rel="icon" href={favicon} />
-	<title>Bar Goldenstein</title>
-</svelte:head>
 
 <Background darkBase fixed />
 

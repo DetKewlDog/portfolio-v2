@@ -48,7 +48,7 @@
 			overflow-hidden mix-blend-screen bg-cover;
 		background-position: 50% 20% !important;
 		animation: anim-bg-zoomin 1.4s cubic-bezier(.61,.29,.02,1) forwards;
-		background: url('/background_forest.png');
+		background: url('/background_forest.webp');
 		mask-image: linear-gradient(
 			to bottom,
 			rgba(0,0,0,0.1),
@@ -72,7 +72,7 @@
 
 	.grid {
 		@apply absolute inset-0 bg-[length:24px_22px] bg-repeat
-			bg-center select-none bg-[url('/grid_cross.png')]
+			bg-center select-none bg-[url('/grid_cross.webp')]
 			opacity-[3%] p-4 bg-clip-content;
 	}
 
