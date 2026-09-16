@@ -196,6 +196,6 @@ export const employments = Object.freeze({
     startDate: new Date('2024-09-01'),
     endDate: new Date('2027-02-28'),
     employmentType: 'Full-Time',
-    projects: ['kratos', 'stemma'],
+    projects: ['kratos'],
   })
 } as const satisfies Record<string, EmploymentEntry>);
