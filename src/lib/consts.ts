@@ -29,10 +29,10 @@ export const projects = Object.freeze({
     status: ProjectStatus.Completed,
     startDate: new Date("2025-09-04"),
     endDate: new Date("2026-02-04"),
-    featured: true,
+    /*featured: true,*/
     isMockImage: true
   }),
-  stemma: newProject({
+  /*stemma: newProject({
     title: "Stemma",
     description: "Security investigation platform that performs relationship-driven discovery of endpoint logs to build interactive incident timelines, accelerating incident reconstruction.",
     category: 'Full Stack',
@@ -42,10 +42,10 @@ export const projects = Object.freeze({
     startDate: new Date("2026-02-10"),
     endDate: null,
     isMockImage: true
-  }),
+  }),*/
   red_alert_map: newProject({
     title: "Red Alert Map",
-    description: "Web application that displays real-time rocket alerts in Israel on a map. The app utilizes real-time alert data provided by Pikud HaOref.",
+    description: "Personal web application that displays real-time rocket alerts in Israel on a map. The app utilizes real-time alert data provided by Pikud HaOref.",
     category: 'Full Stack',
     href: "https://github.com/DetKewlDog/red-alert-map",
     image: "/projects/red-alert-map.webp",
@@ -140,7 +140,8 @@ export const projects = Object.freeze({
     tags: ['React', 'Python'],
     status: ProjectStatus.Completed,
     startDate: new Date("2023-11-13"),
-    endDate: new Date("2024-04-04")
+    endDate: new Date("2024-04-04"),
+    featured: true,
   })
 } as const satisfies Record<string, ProjectEntry>);
 
